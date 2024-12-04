@@ -67,6 +67,7 @@ public class LoginApp extends JFrame {
             if (rs.next()) {
                 userName = rs.getString("Name");
             }
+            System.out.println("Test change");
             rs.close();
             stmt.close();
         } catch (Exception e) {
