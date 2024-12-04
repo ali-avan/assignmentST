@@ -13,7 +13,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -21,10 +20,15 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          java-version: "11" # Or any version of Java that your project requires
+          java-version: "11" # Specify the Java version you're using
+          distribution: "adoptopenjdk" # Specify the Java distribution (e.g., adoptopenjdk, openjdk, zulu)
 
-      - name: Build with Maven (or Gradle)
-        run: mvn install # Use this if you're using Maven; change to 'gradle build' if using Gradle
+      - name: Install dependencies
+        run: |
+          # If you have any dependencies for your Java project (e.g., Maven), you can install them here.
+          # Example for Maven:
+          sudo apt-get install maven
 
       - name: Run Unit Tests
-        run: mvn test # Again, use 'gradle test' if using Gradle
+        run: |
+          mvn clean install  # Run Maven to install dependencies and run tests
